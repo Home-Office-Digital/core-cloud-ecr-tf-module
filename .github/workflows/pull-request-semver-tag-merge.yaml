@@ -27,20 +27,20 @@ jobs:
 
       - name: Parse the SemVer label
         id: label
-        uses: Home-Office-Digital/match-label-action@v1
+        uses: UKHomeoffice/match-label-action@7a414a71073cd2f67e0e001ab2c4a38177ea01b6 #v1.05
         with:
           labels: minor,major,patch
           mode: singular
 
       - name: Calculate SemVer value
         id: calculate
-        uses: Home-Office-Digital/semver-calculate-action@v2
+        uses: UKHomeoffice/semver-calculate-action@fd7e1629eda3b5d3cd037d4145d49db12a352c8e #2.07
         with:
           increment: ${{ steps.label.outputs.matchedLabels }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag Repository
-        uses: Home-Office-Digital/semver-tag-action@v4
+        uses: UKHomeoffice/semver-tag-action@v7827a80f5e8898a6775928978d37dbc86441b560 #v3.0
         with:
           tag: ${{ steps.calculate.outputs.version }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
