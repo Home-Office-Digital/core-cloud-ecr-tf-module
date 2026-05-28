@@ -26,7 +26,7 @@ jobs:
 
       - name: Parse the SemVer label
         id: label
-        uses: UKHomeoffice/match-label-action@7a414a71073cd2f67e0e001ab2c4a38177ea01b6 #v1.05
+        uses: UKHomeoffice/match-label-action@a8e8e2690df0a1f72550875a29a73574fdefe5ad #v1.05
         with:
           labels: minor,major,patch
           mode: singular
