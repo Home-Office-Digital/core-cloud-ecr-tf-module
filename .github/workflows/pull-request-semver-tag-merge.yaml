@@ -40,7 +40,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag Repository
-        uses: UKHomeoffice/semver-tag-action@v7827a80f5e8898a6775928978d37dbc86441b560 #v3.0
+        uses: UKHomeOffice/semver-tag-action@c95496307c40862d4e1659b47b7387f8a254a2d1 #4.0.3
         with:
           tag: ${{ steps.calculate.outputs.version }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
