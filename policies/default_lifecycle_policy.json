@@ -15,25 +15,26 @@
     },
     {
       "rulePriority": 20,
-      "description": "Expire untagged artefacts after 7 days",
+      "description": "Keep latest 50 semver tags before archiving them",
       "selection": {
-        "tagStatus": "untagged",
-        "countType": "sinceImagePushed",
-        "countUnit": "days",
-        "countNumber": 7
+        "tagStatus": "tagged",
+        "tagPatternList": ["*.*.*", "v*.*.*"],
+        "countType": "imageCountMoreThan",
+        "countNumber": 50
       },
       "action": {
-        "type": "expire"
+        "type": "transition",
+        "targetStorageClass": "archive"
       }
     },
     {
       "rulePriority": 30,
-      "description": "keep the latest 30 tags before archiving them",
+      "description": "Archive all other artefacts if they haven't been pulled in 60 days",
       "selection": {
-        "tagStatus": "tagged",
-        "tagPatternList": ["*"],
-        "countType": "imageCountMoreThan",
-        "countNumber": 30
+        "tagStatus": "any",
+        "countType": "sinceImagePulled",
+        "countUnit": "days",
+        "countNumber": 60
       },
       "action": {
         "type": "transition",
@@ -42,16 +43,16 @@
     },
     {
       "rulePriority": 40,
-      "description": "Archive artefacts that have not been pulled within 30 days",
+      "description": "Expire archived untagged artefacts not referenced by an manifest list after 90 days",
       "selection": {
-        "tagStatus": "any",
-        "countType": "sinceImagePulled",
+        "tagStatus": "untagged",
+        "countType": "sinceImageTransitioned",
         "countUnit": "days",
-        "countNumber": 30
+        "countNumber": 90,
+        "storageClass": "archive"
       },
       "action": {
-        "type": "transition",
-        "targetStorageClass": "archive"
+        "type": "expire"
       }
     },
     {
