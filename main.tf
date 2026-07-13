@@ -19,8 +19,8 @@ module "ecr" {
   repository_encryption_type = var.repo_encryption_type
   repository_kms_key         = try((var.repo_kms_key == null ? null : data.aws_kms_key.this[0].arn), null)
 
-  repository_read_access_arns        = try(each.value.repository_read_write_access_arns, var.ecr_config.common_options.repository_read_write_access_arns, [])
-  repository_read_write_access_arns  = try(each.value.repository_read_access_arns, var.ecr_config.common_options.repository_read_access_arns, [])
+  repository_read_access_arns        = try(each.value.repository_read_access_arns, var.ecr_config.common_options.repository_read_access_arns, [])
+  repository_read_write_access_arns  = try(each.value.repository_read_write_access_arns, var.ecr_config.common_options.repository_read_write_access_arns, [])
   repository_lambda_read_access_arns = try(each.value.repository_lambda_read_access_arns, []) # Lambda ECR access to be done on a repo by repo basis only
   repository_policy_statements       = try(each.value.repository_policy_statements, var.ecr_config.common_options.repository_policy_statements, {})
 
