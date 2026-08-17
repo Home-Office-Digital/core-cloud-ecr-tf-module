@@ -51,6 +51,7 @@
 
 ## Token Usage
 
+- 18 credits used
 - Single session, ~15 minutes wall-clock time
 - ~12 agent turns with ~50+ tool calls
 - Agent self-corrected twice (mock provider fix, module boundary constraint workaround)
